@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock title %}</title>
+    <link rel="stylesheet" href="{% static 'src/output.css' %}" />
+</head>
+
+<body>
+    <main>
+        <section>{% include "components/header.html" %}</section>
+        <section class="flex">
+            <section id="sidebarContainer" class="transition-all duration-300 overflow-hidden w-1/6">
+                {% include "components/sidebar.html" %}
+            </section>
+            
+            <section id="content" class="p-4 bg-red-500 w-full">
+                {% block content %}{% endblock content %}
+            </section>
+        </section>
+        {% block js %}{% endblock js %}
+    </main>
+</body>
+
+</html>

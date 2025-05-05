@@ -1,0 +1,48 @@
+<nav id="sidebar" class="bg-white text-gray-800 h-[calc(100vh-60px)] transform translate-x-0 transition-opacity duration-300 z-50 border-r border-gray-200">
+
+  <ul class="p-4 space-y-4 menu rounded-box w-full">
+    <li><a href="#">{% include "icons/home.svg" %} Home</a></li>
+    <li><a href="#"> {% include "icons/tools.svg" %} Productus</a></li>
+    <li><a href="#"> {% include "icons/inventory.svg" %} Inventory</a></li>
+
+    <li>
+      <details open class="group">
+        <summary onclick="handleDetailsToggle(event)"></summary>
+        <ul class="pl-4">
+          <li><a href="#">Submenu 1</a></li>
+          <li><a href="#">Submenu 2</a></li>
+        </ul>
+      </details>
+    </li>
+
+    <li>
+      <details class="group">
+        <summary onclick="handleDetailsToggle(event)">Parent 2</summary>
+        <ul class="pl-4">
+          <li><a href="#">Submenu 1</a></li>
+          <li><a href="#">Submenu 2</a></li>
+        </ul>
+      </details>
+    </li>
+  </ul>
+</nav>
+
+<script>
+  function handleDetailsToggle(event) {
+    event.preventDefault();
+    const currentDetails = event.target.closest('details');
+    const allDetails = document.querySelectorAll('#sidebar details');
+
+    allDetails.forEach(details => {
+      if (details !== currentDetails) {
+        details.removeAttribute('open');
+      }
+    });
+
+    if (currentDetails.hasAttribute('open')) {
+      currentDetails.removeAttribute('open');
+    } else {
+      currentDetails.setAttribute('open', '');
+    }
+  }
+</script>

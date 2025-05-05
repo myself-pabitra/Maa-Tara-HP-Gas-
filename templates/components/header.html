@@ -1,0 +1,33 @@
+<header class="bg-gray-200 flex justify-between items-center p-4 h-[60px]">
+    <span class="flex items-center gap-4">
+        <span id="hamburger" onclick="toggleSidebar()" class="cursor-pointer text-2xl w-5">✕</span>
+        <h1 class="text-xl font-semibold">Header</h1>
+    </span>
+    <nav class="flex gap-4 items-center">
+        <a href="/">Home</a>
+        <a href="/about">About</a>
+        <a href="/contact">Contact</a>
+    </nav>
+</header>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const sidebarContainer = document.getElementById('sidebarContainer');
+        const hamburger = document.getElementById('hamburger');
+
+        const isCollapsed = sidebarContainer.classList.contains('w-0');
+
+        // Toggle width
+        sidebarContainer.classList.toggle('w-1/6');
+        sidebarContainer.classList.toggle('w-0');
+
+        // Hide or show sidebar content
+        sidebar.classList.toggle('opacity-0');
+        sidebar.classList.toggle('pointer-events-none');
+
+        // Hamburger icon toggle
+        hamburger.innerHTML = isCollapsed ? '✕' : '☰';
+    }
+
+</script>
