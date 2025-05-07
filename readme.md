@@ -1,3 +1,5 @@
-npx @tailwindcss/cli -i ./static/css/input.css -o ./static/css/output.css --watch
+npx @tailwindcss/cli -i ./static/src/input.css -o ./static/src/output.css --watch
 
 [heroicon.com](https://heroicons.com/)
+
+

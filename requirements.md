@@ -1,0 +1,5 @@
+1) inventory : 1 module thakbe jeikhane sob item add kora hobe , [item name , quantity, in stock, buy price, Saling price,  Discount applicable]..
+1.1) sale price ta depend korbe subdealer id opore , because sob subdealer der discount soman noy.
+3) 1 module thabe jeikhane subdealer add kora jabe . oder ke add korar jonno module thakbe "Subdealer id ", "Name", "Phone Number", "Address", "Item price with discount(drpdown) ex: 14.2kg cylinder, 19kg cylinder " ,pipe , regulater,........, 
+4) bill section : subdealer id dhore bill hobe, jemon dhoro subdealer "a" 10 pis cylinder niyeche . dropdown e sob subdealer er num thakbe too oikhantheke select korbo "a" then put korte hobe koto pis niyeche "10" then select korbo payment mode "online" na "cash" jodi online hoy select korbo "manual Payment " na " consumer payment " 
+5) ebar consumer payment ekta universal table a upload hobe too dharo subdealer "a" and subdealer " b " eki sathe eki date a payment dekhache takhon oita..........
