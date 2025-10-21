@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Create Subdealer{% endblock title %}
+
+{% block content %}
+<div class="flex justify-center mt-8">
+  <form method="post" class="w-full max-w-lg bg-base-200 p-8 rounded-2xl shadow-xl space-y-6">
+    {% csrf_token %}
+    <h2 class="text-2xl font-semibold text-center mb-6 text-primary">Add New Subdealer</h2>
+
+    <!-- Subdealer Name -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Subdealer Name</span>
+      </label>
+      <input type="text" name="name" placeholder="Enter subdealer name"
+        class="input input-bordered w-full focus:outline-none" required />
+    </div>
+
+    <!-- Phone Number -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Phone Number</span>
+      </label>
+      <input type="text" name="phone_number" placeholder="Enter phone number"
+        class="input input-bordered w-full focus:outline-none" required />
+    </div>
+
+    <!-- Address -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Address</span>
+      </label>
+      <textarea name="address" placeholder="Enter address"
+        class="textarea textarea-bordered w-full h-24 focus:outline-none" required></textarea>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-control mt-6">
+      <button type="submit" class="btn btn-primary w-full">
+        <i class="fa-solid fa-plus mr-2"></i> Add Subdealer
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

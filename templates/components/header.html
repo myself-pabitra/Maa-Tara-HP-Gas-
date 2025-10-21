@@ -1,12 +1,16 @@
-<header class="bg-gray-200 flex justify-between items-center p-4 h-[60px]">
+<header class="bg-white shadow-md flex justify-between items-center px-6 h-[60px] sticky top-0 z-50">
     <span class="flex items-center gap-4">
         <span id="hamburger" onclick="toggleSidebar()" class="cursor-pointer text-2xl w-5">✕</span>
-        <h1 class="text-2xl font-bold text-indigo-600 mask-b-from-neutral-900">Maa Tara HP Gas</h1>
+                <h1 class="text-3xl font-extrabold bg-gradient-to-r from-indigo-600 via-purple-500 to-pink-500 
+                   text-transparent bg-clip-text tracking-tight">
+            Maa Tara HP Gas
+        </h1>
     </span>
-    <nav class="flex gap-4 items-center">
-        <a href="/">Home</a>
-        <a href="/about">About</a>
-        <a href="/contact">Contact</a>
+    <!-- Navigation (hidden on small screens) -->
+    <nav class="hidden md:flex gap-6 text-gray-700 font-medium">
+        <a href="/" class="hover:text-indigo-600 transition">Home</a>
+        <a href="/about" class="hover:text-indigo-600 transition">About</a>
+        <a href="/contact" class="hover:text-indigo-600 transition">Contact</a>
     </nav>
 </header>
 

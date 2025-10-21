@@ -1,13 +1,17 @@
 from django.contrib import admin
-from .models import Subdealer, SubdealerInventory
+from .models import Subdealer,SubDealerSKUDiscount,Cylender_information
 
 
 @admin.register(Subdealer)
 class SubdealerAdmin(admin.ModelAdmin):
-    list_display = ['name', 'phone_number', 'address', 'discount']
+    list_display = ['name', 'phone_number', 'address']
     search_fields = ['name']
 
-@admin.register(SubdealerInventory)
-class SubdealerInventoryAdmin(admin.ModelAdmin):
-    list_display = ['subdealer', 'product', 'discounted_price']
-    search_fields = ['subdealer__name', 'product__product_name']
+@admin.register(SubDealerSKUDiscount)
+class SubDealerSKUDiscountAdmin(admin.ModelAdmin):
+    list_display = ['subdealer', 'product', 'product_discount']
+
+
+admin.site.register(Cylender_information)
+
+

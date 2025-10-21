@@ -1,0 +1,60 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Add New Employee{% endblock title %}
+
+{% block content %}
+<div class="flex justify-center mt-10">
+  <div class="w-full max-w-lg bg-base-200 p-8 rounded-2xl shadow-xl space-y-6">
+    <h2 class="text-2xl font-bold text-center text-primary mb-6">Add New Employee</h2>
+
+    <form method="post" class="space-y-4">
+      {% csrf_token %}
+      <div class="form-control">
+        <label class="label"><span class="label-text">Employee Name</span></label>
+        <input type="text" name="employee_name" placeholder="Enter name" class="input input-bordered w-full" required>
+      </div>
+
+      <div class="form-control">
+        <label class="label"><span class="label-text">Phone</span></label>
+        <input type="text" name="phone" placeholder="Enter phone number" class="input input-bordered w-full" required>
+      </div>
+
+      <div class="form-control">
+        <label class="label"><span class="label-text">Address</span></label>
+        <textarea name="address" placeholder="Enter address" class="textarea textarea-bordered w-full" required></textarea>
+      </div>
+
+      <div class="form-control mt-4">
+        <button type="submit" class="btn btn-primary w-full">
+          <i class="fa-solid fa-plus mr-2"></i> Add Employee
+        </button>
+      </div>
+    </form>
+
+    {% if employees %}
+      <h3 class="text-xl font-semibold mt-8 mb-4">All Employees</h3>
+      <div class="overflow-x-auto">
+        <table class="table table-zebra w-full">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Phone</th>
+              <th>Address</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for emp in employees %}
+              <tr>
+                <td>{{ emp.name }}</td>
+                <td>{{ emp.phone }}</td>
+                <td>{{ emp.address }}</td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,63 @@
+{% extends 'layout.html' %}
+{% load static %}
+
+{% block title %}Add Subdealer Discount{% endblock title %}
+
+{% block content %}
+<div class="flex justify-center mt-8">
+  <form method="post" class="w-full max-w-lg bg-base-200 p-8 rounded-2xl shadow-xl space-y-6">
+    {% csrf_token %}
+    <h2 class="text-2xl font-semibold text-center mb-6 text-primary">Add Subdealer Discount</h2>
+
+    <!-- Subdealer Name -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Subdealer Name</span>
+      </label>
+      <select name="subdealer_code" class="select select-bordered w-full" required>
+        {% for subdealer in subdealers %}
+          {% if existing_discount and existing_discount.subdealer.subdealerCode == subdealer.subdealerCode %}
+            <option value="{{ subdealer.subdealerCode }}" selected>{{ subdealer.name }}</option>
+          {% else %}
+            <option value="{{ subdealer.subdealerCode }}">{{ subdealer.name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Product Name -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Product Name</span>
+      </label>
+      <select name="product_name" class="select select-bordered w-full" required>
+        {% for product in products %}
+          {% if existing_discount and existing_discount.product.id == product.id %}
+            <option value="{{ product.id }}" selected>{{ product.product_name }}</option>
+          {% else %}
+            <option value="{{ product.id }}">{{ product.product_name }}</option>
+          {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+
+    <!-- Discount Amount -->
+    <div class="form-control">
+      <label class="label">
+        <span class="label-text font-medium">Discount Amount</span>
+      </label>
+      <input type="number" name="discount_amount"
+             value="{% if existing_discount %}{{ existing_discount.product_discount }}{% endif %}"
+             class="input input-bordered w-full" required>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="form-control mt-6">
+      <button type="submit" class="btn btn-primary w-full">
+        <i class="fa-solid fa-plus mr-2"></i>
+        {% if existing_discount %}Update Discount{% else %}Add Subdealer Discount{% endif %}
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

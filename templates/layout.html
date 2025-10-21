@@ -17,10 +17,16 @@
                 {% include "components/sidebar.html" %}
             </section>
             
-            <section id="content" class="p-4 bg-red-500 w-full">
-                {% block content %}{% endblock content %}
+            <section id="content" class="p-4 w-full">
+                {% block content %}
+
+                {% endblock content %}
             </section>
         </section>
+
+            <!--  alert component here -->
+        {% include "components/alert.html" %}
+
         {% block js %}{% endblock js %}
     </main>
 </body>

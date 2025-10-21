@@ -1,29 +1,40 @@
 <nav id="sidebar" class="bg-white text-gray-800 h-[calc(100vh-60px)] transform translate-x-0 transition-opacity duration-300 z-50 border-r border-gray-200">
 
   <ul class="p-4 space-y-4 menu rounded-box w-full">
-    <li><a href="#">{% include "icons/home.svg" %} Home</a></li>
-    <li><a href="#"> {% include "icons/tools.svg" %} Productus</a></li>
-    <li><a href="#"> {% include "icons/inventory.svg" %} Inventory</a></li>
+    <li><a href="/">{% include "icons/home.svg" %} Home</a></li>
+    <li><a href="#"> {% include "icons/users.svg" %} SubDealers</a></li>
+    <li><a href="{% url 'manage_products' %}"> {% include "icons/inventory.svg" %} Inventory</a></li>
 
     <li>
       <details open class="group">
-        <summary onclick="handleDetailsToggle(event)"></summary>
+        <summary onclick="handleDetailsToggle(event)">Sub Dealers</summary>
         <ul class="pl-4">
-          <li><a href="#">Submenu 1</a></li>
-          <li><a href="#">Submenu 2</a></li>
+          <li><a href="{% url 'CreateNewSubDealers' %}">Add Subdealer</a></li>
+          <li><a href="{% url 'addSubDealersProductDiscount' %}">Add Discount</a></li>
+          <li><a href="{% url 'view_subdealer_discounts' %}">View Discount</a></li>
         </ul>
       </details>
     </li>
 
     <li>
       <details class="group">
-        <summary onclick="handleDetailsToggle(event)">Parent 2</summary>
+        <summary onclick="handleDetailsToggle(event)">Productus</summary>
         <ul class="pl-4">
-          <li><a href="#">Submenu 1</a></li>
+          <li><a href="{% url 'Add_product' %}">Add to Inventory</a></li>
           <li><a href="#">Submenu 2</a></li>
         </ul>
       </details>
     </li>
+
+        <li>
+      <details class="group">
+        <summary onclick="handleDetailsToggle(event)">Employees</summary>
+        <ul class="pl-4">
+          <li><a href="{% url 'add_new_employees' %}">Add Employees</a></li>
+        </ul>
+      </details>
+    </li>
+
   </ul>
 </nav>
 

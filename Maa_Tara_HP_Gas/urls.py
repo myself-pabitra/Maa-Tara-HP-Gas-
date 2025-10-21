@@ -8,4 +8,8 @@ urlpatterns = [
     path("", views.dashboard, name="dashboard"),
     # Inventory appllication URLs
     path("inventory/", include("inventory.urls")),
+    # Subdealers appllication URLs
+    path("subdealers/", include("SubDealers.urls")),
+    # Employee Application URLs
+    path("employees/",include("employees.urls")),
 ]

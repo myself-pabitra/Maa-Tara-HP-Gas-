@@ -7,12 +7,9 @@ class ProductInventoryAdmin(admin.ModelAdmin):
     list_display = [
         "product_name",
         "product_quantity",
-        "selling_price",
+        "product_price",
         "buy_price",
         "in_stock",
-        "discount_applicable",
     ]
     search_fields = ["product_name"]
-    list_filter = ["in_stock", "discount_applicable"]
-
-
+    list_filter = ["in_stock"]

@@ -1,0 +1,49 @@
+<!-- components/alert.html -->
+
+<div id="alert-container" class="fixed top-6 right-6 z-50 space-y-3"></div>
+
+<script>
+function showAlert(message, type = "success", duration = 4000) {
+  const colors = {
+    success: "alert-success",
+    error: "alert-error",
+    warning: "alert-warning",
+    info: "alert-info",
+  };
+
+  const alert = document.createElement("div");
+  alert.className = `alert ${colors[type]} shadow-lg transition-all duration-300 animate-fade-in`;
+  alert.innerHTML = `
+    <div class="flex items-center justify-between w-full">
+      <span class="text-sm font-medium">${message}</span>
+      <button class="btn btn-ghost btn-xs" onclick="this.closest('.alert').remove()">✕</button>
+    </div>
+  `;
+
+  const container = document.getElementById("alert-container");
+  container.appendChild(alert);
+
+  setTimeout(() => {
+    alert.classList.add("opacity-0", "translate-y-2");
+    setTimeout(() => alert.remove(), 300);
+  }, duration);
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+  {% if messages %}
+    {% for message in messages %}
+      showAlert("{{ message|escapejs }}", "{{ message.tags|default:'info' }}");
+    {% endfor %}
+  {% endif %}
+});
+</script>
+
+<style>
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out;
+}
+</style>
