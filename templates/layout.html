@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}{% endblock title %}</title>
     <link rel="stylesheet" href="{% static 'src/output.css' %}" />
+    <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
 </head>
 
 <body>
@@ -16,7 +17,6 @@
             <section id="sidebarContainer" class="transition-all duration-300 overflow-hidden w-1/6">
                 {% include "components/sidebar.html" %}
             </section>
-            
             <section id="content" class="p-4 w-full">
                 {% block content %}
 

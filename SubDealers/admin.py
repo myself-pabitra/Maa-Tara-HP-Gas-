@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Subdealer,SubDealerSKUDiscount,Cylender_information
+from .models import PredefinedExpense, Subdealer,SubDealerSKUDiscount,Cylender_information,DailyInvoice,DailyInvoiceExpense,DailyInvoiceLineItem
 
 
 @admin.register(Subdealer)
@@ -13,5 +13,10 @@ class SubDealerSKUDiscountAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Cylender_information)
+admin.site.register(PredefinedExpense)
+admin.site.register(DailyInvoice)
+admin.site.register(DailyInvoiceExpense)
+admin.site.register(DailyInvoiceLineItem)
+
 
 

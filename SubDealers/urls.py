@@ -5,4 +5,5 @@ urlpatterns = [
     path("add-subdealers/", views.CreateNewSubDealers, name="CreateNewSubDealers"),
     path('add-subdealers-product-discount/',views.addSubDealersProductDiscount,name='addSubDealersProductDiscount'),
     path("view-discounts/", views.view_subdealer_discounts, name="view_subdealer_discounts"),
+    path("create-daily-sell-invoice/", views.create_invoice, name="create_daily_sell_invoice"),
 ]

@@ -1,7 +1,8 @@
 import random
 import string
-from django.db import models
+from django.db import models,transaction
 from inventory.models import ProductInventory
+from django.utils import timezone
 
 
 class Subdealer(models.Model):
@@ -65,3 +66,75 @@ class Cylender_information(models.Model):
     
     class Meta:
         db_table = "Cylender_information"
+
+
+
+class DailyInvoice(models.Model):
+    invoice_number = models.CharField(max_length=20, unique=True, editable=False)
+    invoice_date = models.DateField(auto_now_add=True)
+    employees = models.ManyToManyField('employees.Employee')
+    payment_mode = models.CharField(max_length=20)
+    notes = models.TextField(blank=True, null=True)
+    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    other_expense = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    grand_total = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+
+    class Meta:
+        db_table = "DailyInvoice"
+
+    def save(self, *args, **kwargs):
+        # Only assign invoice_number once
+        if not self.invoice_number:
+            today = timezone.now().strftime("%Y%m%d")
+            with transaction.atomic():
+                # Get latest invoice for today
+                last_invoice = (
+                    DailyInvoice.objects.filter(invoice_number__startswith=f"INV-{today}")
+                    .order_by("-invoice_number")
+                    .first()
+                )
+                if last_invoice:
+                    last_seq = int(last_invoice.invoice_number.split("-")[-1])
+                    next_seq = last_seq + 1
+                else:
+                    next_seq = 1
+                self.invoice_number = f"INV-{today}-{next_seq:05d}"
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return self.invoice_number
+
+
+class DailyInvoiceLineItem(models.Model):
+    invoice = models.ForeignKey(DailyInvoice, on_delete=models.CASCADE, related_name='line_items')
+    subdealer = models.ForeignKey('SubDealers.Subdealer', on_delete=models.PROTECT)
+    product = models.ForeignKey('inventory.ProductInventory', on_delete=models.PROTECT)
+    quantity = models.PositiveIntegerField()
+    submitted_blank = models.PositiveIntegerField(default=0)
+    discounted_price = models.DecimalField(max_digits=10, decimal_places=2)
+    line_total = models.DecimalField(max_digits=10, decimal_places=2)
+    due_cyl = models.PositiveIntegerField()
+
+    def __str__(self):
+        return f"{self.invoice.invoice_number} - {self.subdealer}"
+
+
+class DailyInvoiceExpense(models.Model):
+    invoice = models.ForeignKey(DailyInvoice, on_delete=models.CASCADE, related_name='expenses')
+    expense_name = models.CharField(max_length=100)
+    expense_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"{self.invoice.invoice_number} - {self.expense_name}: ₹{self.expense_amount}"
+
+
+class PredefinedExpense(models.Model):
+    name = models.CharField(max_length=100, unique=True)
+    default_amount = models.DecimalField(max_digits=10, decimal_places=2)
+
+    class Meta:
+        db_table = "predefined_expenses"
+
+    def __str__(self):
+        return f"{self.name} - ₹{self.default_amount}"
+    
